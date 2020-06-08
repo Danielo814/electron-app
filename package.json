@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Danielo814/electron-app/issues"
   },
-  "homepage": "https://github.com/Danielo814/electron-app#readme"
+  "homepage": "https://github.com/Danielo814/electron-app#readme",
+  "devDependencies": {
+    "electron": "9.0.3"
+  }
 }
