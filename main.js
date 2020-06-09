@@ -35,7 +35,7 @@ function createWindow() {
     }] : []),
     // { role: 'fileMenu' }
     {
-      label: 'File',
+      label: 'Menu',
       submenu: [
         isMac ? { role: 'close' } : { role: 'quit' }
       ]
