@@ -1,6 +1,7 @@
 const { app, BrowserWindow, Menu } = require("electron");
 
 const isMac = process.platform === 'darwin'
+require('electron-reload')(__dirname);  
 
 function createWindow() {
   // Create the browser window.
@@ -37,81 +38,12 @@ function createWindow() {
     {
       label: 'Menu',
       submenu: [
-        isMac ? { role: 'close' } : { role: 'quit' }
-      ]
-    },
-    // { role: 'editMenu' }
-    {
-      label: 'Edit',
-      submenu: [
-        { role: 'undo' },
-        { role: 'redo' },
-        { type: 'separator' },
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' },
-        ...(isMac ? [
-          { role: 'pasteAndMatchStyle' },
-          { role: 'delete' },
-          { role: 'selectAll' },
-          { type: 'separator' },
-          {
-            label: 'Speech',
-            submenu: [
-              { role: 'startspeaking' },
-              { role: 'stopspeaking' }
-            ]
-          }
-        ] : [
-          { role: 'delete' },
-          { type: 'separator' },
-          { role: 'selectAll' }
-        ])
-      ]
-    },
-    // { role: 'viewMenu' }
-    {
-      label: 'View',
-      submenu: [
-        { role: 'reload' },
-        { role: 'forcereload' },
-        { role: 'toggledevtools' },
-        { type: 'separator' },
-        { role: 'resetzoom' },
-        { role: 'zoomin' },
-        { role: 'zoomout' },
-        { type: 'separator' },
-        { role: 'togglefullscreen' }
+        isMac ? { role: 'close' } : { role: 'quit' },
+        {label: 'Adjust Notification Value'},
+        {label: 'Coin Market Cap'}
       ]
     },
     // { role: 'windowMenu' }
-    {
-      label: 'Window',
-      submenu: [
-        { role: 'minimize' },
-        { role: 'zoom' },
-        ...(isMac ? [
-          { type: 'separator' },
-          { role: 'front' },
-          { type: 'separator' },
-          { role: 'window' }
-        ] : [
-          { role: 'close' }
-        ])
-      ]
-    },
-    {
-      role: 'help',
-      submenu: [
-        {
-          label: 'Learn More',
-          click: async () => {
-            const { shell } = require('electron')
-            await shell.openExternal('https://electronjs.org')
-          }
-        }
-      ]
-    }
   ]
   
   const menu = Menu.buildFromTemplate(template)
