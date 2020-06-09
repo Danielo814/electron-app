@@ -1,7 +1,7 @@
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, shell, BrowserWindow, Menu } = require("electron");
 
-const isMac = process.platform === 'darwin'
-require('electron-reload')(__dirname);  
+const isMac = process.platform === "darwin";
+require("electron-reload")(__dirname);
 
 function createWindow() {
   // Create the browser window.
@@ -14,41 +14,51 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  win.loadFile("index.html");
+  win.loadFile("src/index.html");
 
   // Open the DevTools.
   win.webContents.openDevTools();
   const template = [
     // { role: 'appMenu' }
-    ...(isMac ? [{
-      label: app.name,
-      submenu: [
-        { role: 'about' },
-        { type: 'separator' },
-        { role: 'services' },
-        { type: 'separator' },
-        { role: 'hide' },
-        { role: 'hideothers' },
-        { role: 'unhide' },
-        { type: 'separator' },
-        { role: 'quit' }
-      ]
-    }] : []),
+    ...(isMac
+      ? [
+          {
+            label: app.name,
+            submenu: [
+              { role: "about" },
+              { type: "separator" },
+              { role: "services" },
+              { type: "separator" },
+              { role: "hide" },
+              { role: "hideothers" },
+              { role: "unhide" },
+              { type: "separator" },
+              { role: "quit" },
+            ],
+          },
+        ]
+      : []),
     // { role: 'fileMenu' }
     {
-      label: 'Menu',
+      label: "Menu",
       submenu: [
-        isMac ? { role: 'close' } : { role: 'quit' },
-        {label: 'Adjust Notification Value'},
-        {label: 'Coin Market Cap'}
-      ]
+        isMac ? { role: "close" } : { role: "quit" },
+        { label: "Adjust Notification Value" },
+        { type: "separator" },
+        {
+          label: "Coin Market Cap",
+          click() {
+            shell.openExternal("http://coinmarketcap.com");
+          },
+        },
+      ],
     },
+    {label: 'Info'},
     // { role: 'windowMenu' }
-  ]
-  
-  const menu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(menu)
+  ];
 
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
 }
 
 // This method will be called when Electron has finished
