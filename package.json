@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/Danielo814/electron-app#readme",
   "devDependencies": {
-    "electron": "9.0.3"
+    "electron": "15.5.5"
   },
   "dependencies": {
     "electron-reload": "^1.5.0"
